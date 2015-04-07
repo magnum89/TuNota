@@ -2,16 +2,34 @@ package nota.oja.com.tunota;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
+import nota.oja.com.tunota.basedatos.NotaItem;
+import nota.oja.com.tunota.basedatos.NotaOrigenDatos;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    private NotaOrigenDatos datosorigen;//instancia de la fuente de datos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //asignaremos memoria a esa variable
+        datosorigen = new NotaOrigenDatos();
+        //creamos la lista de tipo nota item
+        List<NotaItem> notas = datosorigen.encontrarTodo();
+        NotaItem nota = notas.get(0);//posicion 0
+        //guardar la fecha y la hora usando log clase de registro q se utiliza para depurar ejecuciones android
+
+        Log.i("Nota", nota.getClave());
+
     }
 
 
