@@ -22,11 +22,14 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //asignaremos memoria a esa variable
-        datosorigen = new NotaOrigenDatos();
+        datosorigen = new NotaOrigenDatos(this);//agregamos this
         //creamos la lista de tipo nota item
         List<NotaItem> notas = datosorigen.encontrarTodo();
         NotaItem nota = notas.get(0);//posicion 0
         //guardar la fecha y la hora usando log clase de registro q se utiliza para depurar ejecuciones android
+
+        //agregamos el actualizar
+        datosorigen.actualizar(nota);
 
         Log.i("Nota", nota.getClave());
 
