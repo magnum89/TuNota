@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;//esta no se agrego automaticamente
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by usuario on 06/04/2015.
@@ -23,10 +26,26 @@ public class NotaOrigenDatos {
 
     public List<NotaItem> encontrarTodo (){
         List<NotaItem> listaNota = new ArrayList<NotaItem>();//asignamos memoria
+        //creamos un mapa que contiene un elemento clave y un valor
+        //recibe dos argumentos un string el segundo ? no sabemos el tipo de dato que retornara
+        Map<String, ?> notamapa = NotaPerf.getAll();// y obtenemos todo lo que hay en la lista
+        //pero desordenado asi que necestamos ordenar las claves
+        SortedSet<String> claves = new TreeSet<String>(notamapa.keySet());//creamos un objeto con tree set que puede ordenar los daos
+        //recorrer las claves para obtener el elemento de la lista
+        for (String clave : claves)//enviamos una cadena y recorrera el arbol de claves
+        {
+            NotaItem nota = new NotaItem();
+            nota.setClave(clave);
+            nota.setTexto((String)notamapa.get(clave));
+            //añadimos a la lista de nota
+            listaNota.add(nota);
+        }
+
+        //eliminamos estas lineas de retorno que ya no son necesarias:
         //crear un objeto de la clase notaitem
-        NotaItem nota = NotaItem.obtenerNuevo();
+        //NotaItem nota = NotaItem.obtenerNuevo();
         //añadimos a la lista
-        listaNota.add(nota);
+        //listaNota.add(nota);
         //retornamos la lista
         return listaNota;
     }

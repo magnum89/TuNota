@@ -28,10 +28,16 @@ public class MainActivity extends ActionBarActivity {
         NotaItem nota = notas.get(0);//posicion 0
         //guardar la fecha y la hora usando log clase de registro q se utiliza para depurar ejecuciones android
 
-        //agregamos el actualizar
+        //enviaremos un texto que diga actualizado
+        nota.setTexto("Actualizado!");
         datosorigen.actualizar(nota);
 
-        Log.i("Nota", nota.getClave());
+        //recuperar los datos
+        notas = datosorigen.encontrarTodo();
+        nota = notas.get(0);
+
+        //voy a registrar el dato pero cruzar la clave con el valor
+        Log.i("NOTAS", nota.getClave()+": "+nota.getTexto());
 
     }
 
