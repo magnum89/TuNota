@@ -1,5 +1,7 @@
 package nota.oja.com.tunota.basedatos;
 
+import android.annotation.SuppressLint;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -7,10 +9,12 @@ import java.util.Locale;
 /**
  * Created by usuario on 06/04/2015.
  */
+@SuppressLint("SimpleDateFormat")
 public class NotaItem {
 
     //declaramos las variables clave y valor
     private String clave;//los metemos en un geter y setter
+    private String texto;//damos click generar
 
     public String getClave() {
         return clave;
@@ -28,13 +32,14 @@ public class NotaItem {
         this.texto = texto;
     }
 
-    private String texto;//damos click generar
+
 
     //creamos un constructor que almacenara ls datos del dispositivo
     public static NotaItem obtenerNuevo()
     {
         //variable de tipo local Locale
-        Locale localizacion = new Locale("en_US");//se escoje q devuelva un parametro "en_US"
+        Locale local = new Locale("en_US");//se escoje q devuelva un parametro "en_US"
+        Locale.setDefault(local);
         //porque tiene caracteristicas que otros idiomas no posee
         String patron = "yyyy-MM-dd HH:mm:ss Z"; //la z es que se va a agregar una nueva anotacion que muestra el horario
         //en funcion de meridiano de grenguich
@@ -42,17 +47,22 @@ public class NotaItem {
 
         String clave = formato.format(new Date());//enviamos la fecha actual del dispositivo
 
-        NotaItem cuenta = new NotaItem();//asignamos memoria
+        NotaItem nota = new NotaItem();//asignamos memoria
         //enviamos la clave
-        cuenta.setClave(clave);
+        nota.setClave(clave);
         //y enviamos el texto
-        cuenta.setTexto(" ");//el texto al ser un string podemos enviar una cadena vacia
+        nota.setTexto("");//el texto al ser un string podemos enviar una cadena vacia
 
         //retornamos la variable
-        return cuenta;
+        return nota;
 
 
     }
 
 
+    @Override
+    public String toString() {
+
+        return this.getTexto();
+    }
 }
